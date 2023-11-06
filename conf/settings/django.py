@@ -33,6 +33,10 @@ ALLOWED_HOSTS = env("ALLOWED_HOSTS", cast=lambda v: [s.strip() for s in v.split(
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
+    'api',
+    'chat',
+    'models_app.apps.ModelsAppConfig',
     "daphne",
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,11 +47,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     "rest_framework",
     'rest_framework.authtoken',
-    'channels',
     'service_objects',
-    'api',
-    'chat',
-    'models_app.apps.ModelsAppConfig',
 ]
 
 MIDDLEWARE = [
