@@ -11,9 +11,9 @@ class CardListView(APIView):
     def get(self, request):
         outcome = ServiceOutcome(CardListService, request.data)
         return Response({
-            'TOP': CardSerializer(outcome.result['TOP'], many=True).data,
-            'BOTTOM': CardSerializer(outcome.result['BOTTOM'], many=True).data,
-            'LEFT': CardSerializer(outcome.result['LEFT'], many=True).data,
-            'RIGHT': CardSerializer(outcome.result['RIGHT'], many=True).data,
-            'CORNER': CardSerializer(outcome.result['CORNER'], many=True).data,
+            'TOP': CardSerializer(outcome.result.get('TOP', []), many=True).data,
+            'BOTTOM': CardSerializer(outcome.result.get('BOTTOM', []), many=True).data,
+            'LEFT': CardSerializer(outcome.result.get('LEFT', []), many=True).data,
+            'RIGHT': CardSerializer(outcome.result.get('RIGHT', []), many=True).data,
+            'CORNER': CardSerializer(outcome.result.get('CORNER', []), many=True).data,
         })
