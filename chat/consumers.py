@@ -37,6 +37,22 @@ class WSChatRoomView(WebsocketConsumer):
             }))
         )
 
+    def connect_to_room(self, event):
+        async_to_sync(
+            self.send(text_data=json.dumps({
+                **event,
+                'count_players': int(event['count_players']) + 1
+            }))
+        )
+
+    def disconnect_to_room(self, event):
+        async_to_sync(
+            self.send(text_data=json.dumps({
+                **event,
+                'count_players': int(event['count_players']) - 1
+            }))
+        )
+
     def message(self, event):
         async_to_sync(
             self.send(text_data=json.dumps({
