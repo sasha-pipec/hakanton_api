@@ -27,6 +27,11 @@ class CardListService(ServiceWithResult):
                 cart.index = INDEX[position].pop(-1)
                 cart.save()
             response_dict[position] = cards
+        INDEX[Card.TOP] = [10, 9, 8, 7, 6, 5, 4, 3, 2]
+        INDEX[Card.RIGHT] = [20, 19, 18, 17, 16, 15, 14, 13, 12]
+        INDEX[Card.BOTTOM] = [30, 29, 28, 27, 26, 25, 24, 23, 22]
+        INDEX[Card.LEFT] = [40, 39, 38, 37, 36, 35, 34, 33, 32]
+        INDEX[Card.CORNER] = [31, 21, 11, 1]
         return response_dict
 
     @property
