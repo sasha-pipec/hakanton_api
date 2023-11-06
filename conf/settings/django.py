@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 
 import environ
+
 env = environ.Env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -32,9 +33,6 @@ ALLOWED_HOSTS = env("ALLOWED_HOSTS", cast=lambda v: [s.strip() for s in v.split(
 # Application definition
 
 INSTALLED_APPS = [
-    'api',
-    'chat',
-    'models_app.apps.ModelsAppConfig',
     "rest_framework",
     'service_objects',
     'django.contrib.admin',
@@ -43,6 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
+    'api',
+    'chat',
+    'models_app.apps.ModelsAppConfig',
 ]
 
 MIDDLEWARE = [
@@ -74,7 +76,17 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'conf.wsgi.application'
+ASGI_APPLICATION = 'conf.asgi.application'
 
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -94,7 +106,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
@@ -106,7 +117,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
@@ -114,7 +124,7 @@ STATIC_URL = env("STATIC_URL", cast=str)
 STATIC_ROOT = os.path.join(BASE_DIR, env("STATIC_ROOT", cast=str, default="static"))
 MEDIA_ROOT = os.path.join(BASE_DIR, "/media/")
 MEDIA_URL = "/media/"
-                            
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
