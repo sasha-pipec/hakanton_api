@@ -34,6 +34,7 @@ ALLOWED_HOSTS = env("ALLOWED_HOSTS", cast=lambda v: [s.strip() for s in v.split(
 
 INSTALLED_APPS = [
     "rest_framework",
+    'rest_framework.authtoken',
     'channels',
     "daphne",
     'service_objects',
