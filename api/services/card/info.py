@@ -2,8 +2,9 @@ from functools import lru_cache
 
 from service_objects.fields import ModelField
 
+from api.services.card.action import CardActionService
 from models_app.models import Card, User, UserCard, Room
-from service_objects.services import ServiceWithResult
+from service_objects.services import ServiceWithResult, ServiceOutcome
 from django import forms
 from rest_framework.exceptions import NotFound
 
@@ -36,15 +37,16 @@ class CardInfoService(ServiceWithResult):
             return None
 
     def _user_card(self):
-        try:
-            user_card = UserCard.objects.get(
-                room=self._room,
-                card=self._card,
-                user=self.cleaned_data['user']
-            )
-            question = 1
-        except UserCard.DoesNotExist:
-            pass
+        pass
+        # try:
+        #     user_card = UserCard.objects.get(
+        #         room=self._room,
+        #         card=self._card,
+        #         user=self.cleaned_data['user']
+        #     )
+        #     question = ServiceOutcome(CardActionService, {"pk": 1})
+        # except UserCard.DoesNotExist:
+        #     pass
 
     def card_presence(self):
         if not self._card:

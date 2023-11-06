@@ -6,4 +6,4 @@ from models_app.admin.question.admin import QuestionAdmin
 from models_app.admin.user.admin import UserAdmin
 from models_app.admin.room.admin import RoomAdmin
 from models_app.admin.user_card.admin import UserCardAdmin
-from models_app.admin.user.admin import UserAdmin
+from models_app.admin.answer.admin import AnswerAdmin
