@@ -22,8 +22,12 @@ class UserLoginView(APIView):
         return Response({"key": outcome.result})
 
 
-class RoomUserListView(APIView):
+class RoomUserListCreateView(APIView):
 
     def get(self, request, *args, **kwargs):
         outcome = ServiceOutcome(RoomUserListService, kwargs)
         return Response(UserListSerializer(outcome.result, many=True).data)
+
+    # def post(self, request, *args, **kwargs):
+    #     outcome = ServiceOutcome(RoomUserListService, kwargs)
+    #     return Response(UserListSerializer(outcome.result, many=True).data)
