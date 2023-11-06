@@ -16,6 +16,7 @@ channels-redis = "*"
 daphne = "*"
 channels = "==3.0.4"
 drf-yasg = "*"
+django-cors-headers = "*"
 redis = "*"
 
 [dev-packages]
