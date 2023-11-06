@@ -23,6 +23,7 @@ class User(AbstractUser):
     is_sleep = models.BooleanField(default=False, verbose_name='Состояние хода игрока')
     is_active = models.BooleanField(default=True, verbose_name='Состояние игрока')
     is_walk = models.BooleanField(default=False, verbose_name='Мой ход')
+    position = models.IntegerField(default=0, verbose_name='Позиция')
 
     REQUIRED_FIELDS = []
 

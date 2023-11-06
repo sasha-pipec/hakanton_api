@@ -13,7 +13,8 @@ class UserSerializer(serializers.ModelSerializer):
             'color',
             'is_sleep',
             'is_active',
-            'is_walk'
+            'is_walk',
+            'position'
         )
 
 
