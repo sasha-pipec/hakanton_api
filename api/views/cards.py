@@ -3,6 +3,7 @@ from rest_framework.views import APIView
 from service_objects.services import ServiceOutcome
 
 from api.serializers.card.serializers import CardSerializer
+from api.services.card.info import CardInfoService
 from api.services.card.list import CardListService
 
 
@@ -17,3 +18,10 @@ class CardListView(APIView):
             'RIGHT': CardSerializer(outcome.result.get('RIGHT', []), many=True).data,
             'CORNER': CardSerializer(outcome.result.get('CORNER', []), many=True).data,
         })
+
+
+class CardInfoView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        outcome = ServiceOutcome(CardInfoService, request.data | kwargs)
+        return Response()

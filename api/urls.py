@@ -1,6 +1,6 @@
 from django.urls import path
 
-from api.views.cards import CardListView
+from api.views.cards import CardListView, CardInfoView
 from api.views.user import UserRegisterView, UserLoginView, RoomUserListView
 
 urlpatterns = [
@@ -8,4 +8,5 @@ urlpatterns = [
     path('users/login/', UserLoginView.as_view()),
     path('rooms/<int:id>/users/', RoomUserListView.as_view()),
     path('cards/', CardListView.as_view()),
+    path('rooms/<int:room_id>/cards/<int:id>/info/', CardInfoView.as_view()),
 ]
