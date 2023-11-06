@@ -22,10 +22,28 @@ class AnswerCheckService(ServiceWithResult):
 
     def _check(self):
         if self._answer.is_correct:
-            pass
+            if self.user_card:
+                pass
+            else:
+                UserCard.objects.create(
+                    room=self._room,
+                    card=self._card,
+                    user=self.user
+                )
         else:
             self.user.balance = self.user.balance - 1000
             self.user.save()
+
+    @property
+    @lru_cache
+    def user_card(self):
+        try:
+            return UserCard.objects.get(
+                room=self._room,
+                card=self._card
+            )
+        except UserCard.DoesNotExist:
+            return None
 
     @property
     def user(self):
