@@ -8,6 +8,8 @@ from service_objects.services import ServiceWithResult
 
 from models_app.models import User, Room
 
+COLOR_LIST = ['#FFFA79', '#8AFF96', '#7DD0FF', '#F19DFF', '#FF6262']
+
 
 class RoomAddUserService(ServiceWithResult):
     user = ModelField(User)
@@ -24,7 +26,11 @@ class RoomAddUserService(ServiceWithResult):
     def _add_user(self):
         room = self._room
         room.users.add(self.cleaned_data['user'])
-        if room.users.count() == room.count_players:
+        users = room.users.all()
+        if users.count() == room.count_players:
+            for user in users:
+                user.color = COLOR_LIST.pop(-1)
+                user.save()
             room.status = Room.STARTED
         room.save()
         return room
