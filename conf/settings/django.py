@@ -33,6 +33,7 @@ ALLOWED_HOSTS = env("ALLOWED_HOSTS", cast=lambda v: [s.strip() for s in v.split(
 
 INSTALLED_APPS = [
     'api',
+    'chat',
     'models_app.apps.ModelsAppConfig',
     "rest_framework",
     'service_objects',
