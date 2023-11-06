@@ -19,6 +19,7 @@ drf-yasg = "*"
 django-cors-headers = "*"
 redis = "*"
 
+
 [dev-packages]
 
 [requires]
