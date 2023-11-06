@@ -8,17 +8,26 @@ class Card(models.Model):
     RIGHT = 'RIGHT'
     CORNER = 'CORNER'
 
-    TYPE = (
+    POSITIONS = (
         (TOP, 'Верх'),
         (BOTTOM, 'Низ'),
         (LEFT, 'Лево'),
         (RIGHT, 'Право'),
         (CORNER, 'Угол'),
     )
+
+    DEFAULT = 'DEFAULT'
+    EVENT = 'EVENT'
+
+    TYPES = (
+        (DEFAULT, 'Обычная'),
+        (EVENT, 'Событие'),
+    )
     title = models.CharField(max_length=255, verbose_name='Название')
-    cost = models.IntegerField(verbose_name='Стоимость')
+    cost = models.IntegerField(blank=True, null=True, verbose_name='Стоимость')
     image = models.ImageField(upload_to='cards/', verbose_name='Изображение')
-    type = models.CharField(max_length=6, choices=TYPE, verbose_name='Тип')
+    position = models.CharField(max_length=7, choices=POSITIONS, verbose_name='Позиция')
+    type = models.CharField(max_length=7, choices=TYPES, verbose_name='Тип')
 
     def __str__(self):
         return self.title
