@@ -17,6 +17,8 @@ class WSChatRoomView(AsyncJsonWebsocketConsumer):
             self.room_group_name,
             {
                 'type': 'message',
+                'message': data.get('message'),
+                'username': data.get('username'),
             }
         )
 
