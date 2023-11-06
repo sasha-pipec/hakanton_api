@@ -8,5 +8,8 @@ from api.services.answer.check import AnswerCheckService
 class AnswerCheckView(APIView):
 
     def post(self, request, *args, **kwargs):
-        outcome = ServiceOutcome(AnswerCheckService, request.data | kwargs)
+        outcome = ServiceOutcome(
+            AnswerCheckService,
+            request.data | kwargs | {"user": request.user}
+        )
         return Response()
