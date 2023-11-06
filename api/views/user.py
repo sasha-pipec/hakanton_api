@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from api.serializers.room.serializers import RoomSerializer
 from api.services.room.add_user import RoomAddUserService
-from api.serializers.user.serializers import UserSerializer
+from api.serializers.user.serializers import UserSerializer, UserShortSerializer
 from api.services.user.create import UserRegisterService
 from api.services.user.list_by_room import RoomUserListService
 from api.services.user.login import UserLoginService
@@ -17,7 +17,7 @@ class UserRegisterView(APIView):
         outcome = ServiceOutcome(UserRegisterService, request.data)
         return Response({
             "key": outcome.result["key"],
-            "user": UserSerializer(outcome.result["user"], many=False).data
+            "user": UserShortSerializer(outcome.result["user"], many=False).data
         })
 
 
@@ -27,7 +27,7 @@ class UserLoginView(APIView):
         outcome = ServiceOutcome(UserLoginService, request.data)
         return Response({
             "key": outcome.result["key"],
-            "user": UserSerializer(outcome.result["user"], many=False).data
+            "user": UserShortSerializer(outcome.result["user"], many=False).data
         })
 
 
@@ -35,7 +35,7 @@ class UserShowView(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request, *args, **kwargs):
-        return Response(UserSerializer(request.user).data)
+        return Response(UserShortSerializer(request.user).data)
 
 
 class RoomUserListCreateView(APIView):
