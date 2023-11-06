@@ -26,10 +26,15 @@ class WSChatRoomView(WebsocketConsumer):
         async_to_sync(self.channel_layer.group_send)(
             self.room_group_name,
             {
-                'type': 'message',
-                'message': data.get('message'),
-                'room': data.get('room'),
+                **data
             }
+        )
+
+    def send_color(self, event):
+        async_to_sync(
+            self.send(text_data=json.dumps({
+                **event
+            }))
         )
 
     def message(self, event):

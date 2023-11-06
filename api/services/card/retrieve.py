@@ -9,7 +9,7 @@ class CardRetrieveService(ServiceWithResult):
     pk = forms.IntegerField()
 
     def process(self):
-        self.result = self._card()
+        self.result = self._card
         return self
 
     @property

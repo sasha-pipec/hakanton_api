@@ -11,7 +11,7 @@ class CardActionService(ServiceWithResult):
     pk = forms.IntegerField()
 
     def process(self):
-        self.result = self.collect_dict()
+        self.result = self._action
         return self
 
     @property
@@ -21,7 +21,6 @@ class CardActionService(ServiceWithResult):
             question = Question.objects.all().order_by('?').first()
             return question
         return Event.objects.all().order_by('?').first()
-
 
     @property
     def _card(self):
