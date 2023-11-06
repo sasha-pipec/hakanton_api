@@ -4,5 +4,5 @@ from models_app.models import UserCard
 
 
 @admin.register(UserCard)
-class AnswerAdmin(admin.ModelAdmin):
+class UserCardAdmin(admin.ModelAdmin):
     ...

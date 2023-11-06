@@ -27,7 +27,7 @@ class UserLoginService(ServiceWithResult):
     @lru_cache
     def _user(self) -> [User, None]:
         try:
-            User.objects.get(username=self.cleaned_data['login'])
+            return User.objects.get(username=self.cleaned_data['login'])
         except User.DoesNotExist:
             return None
 
@@ -36,5 +36,5 @@ class UserLoginService(ServiceWithResult):
             raise NotFound("User with this username does not exist")
 
     def check_password(self):
-        if self._user.check_password(self.cleaned_data['password']):
+        if not self._user.check_password(self.cleaned_data['password']):
             raise AuthenticationFailed("The password is not correct")
