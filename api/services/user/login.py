@@ -27,7 +27,7 @@ class UserLoginService(ServiceWithResult):
     @lru_cache
     def _user(self) -> [User, None]:
         try:
-            User.objects.get(username=self.cleaned_data['username'])
+            User.objects.get(username=self.cleaned_data['login'])
         except User.DoesNotExist:
             return None
 

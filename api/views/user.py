@@ -11,14 +11,14 @@ from api.services.user.login import UserLoginService
 class UserRegisterView(APIView):
 
     def post(self, request, *args, **kwargs):
-        outcome = ServiceOutcome(UserRegisterService, request.POST)
+        outcome = ServiceOutcome(UserRegisterService, request.data)
         return Response({"key": outcome.result})
 
 
 class UserLoginView(APIView):
 
     def post(self, request, *args, **kwargs):
-        outcome = ServiceOutcome(UserLoginService, request.POST)
+        outcome = ServiceOutcome(UserLoginService, request.data)
         return Response({"key": outcome.result})
 
 
