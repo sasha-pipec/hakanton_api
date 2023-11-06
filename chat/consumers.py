@@ -2,7 +2,7 @@ import json
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 
 
-class WSChatView(AsyncJsonWebsocketConsumer):
+class WSChatRoomView(AsyncJsonWebsocketConsumer):
     async def connect(self):
         self.room_group_name = 'status_post_for_room_' + str(self.scope['url_route']['kwargs']['id'])
         await self.channel_layer.group_add(
