@@ -18,6 +18,7 @@ class CardSerializer(serializers.ModelSerializer):
             'position',
             'type',
             'color',
+            'index',
         )
 
     def get_color(self, obj):

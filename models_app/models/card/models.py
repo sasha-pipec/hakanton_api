@@ -28,6 +28,7 @@ class Card(models.Model):
     image = models.ImageField(upload_to='cards/', verbose_name='Изображение')
     position = models.CharField(max_length=7, choices=POSITIONS, verbose_name='Позиция')
     type = models.CharField(max_length=7, choices=TYPES, verbose_name='Тип')
+    index = models.IntegerField(default=0, verbose_name='Номер')
 
     def __str__(self):
         return self.title
