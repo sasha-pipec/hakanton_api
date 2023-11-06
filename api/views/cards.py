@@ -13,14 +13,18 @@ from models_app.models import Event
 
 class CardListView(APIView):
 
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         outcome = ServiceOutcome(CardListService, request.data)
+        context = {
+            "user": request.user,
+            "room_id": kwargs['id'],
+        }
         return Response({
-            'TOP': CardSerializer(outcome.result.get('TOP', []), many=True).data,
-            'BOTTOM': CardSerializer(outcome.result.get('BOTTOM', []), many=True).data,
-            'LEFT': CardSerializer(outcome.result.get('LEFT', []), many=True).data,
-            'RIGHT': CardSerializer(outcome.result.get('RIGHT', []), many=True).data,
-            'CORNER': CardSerializer(outcome.result.get('CORNER', []), many=True).data,
+            'TOP': CardSerializer(outcome.result.get('TOP', []), many=True, context=context).data,
+            'BOTTOM': CardSerializer(outcome.result.get('BOTTOM', []), many=True, context=context).data,
+            'LEFT': CardSerializer(outcome.result.get('LEFT', []), many=True, context=context).data,
+            'RIGHT': CardSerializer(outcome.result.get('RIGHT', []), many=True, context=context).data,
+            'CORNER': CardSerializer(outcome.result.get('CORNER', []), many=True, context=context).data,
         })
 
 
