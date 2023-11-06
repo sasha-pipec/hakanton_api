@@ -11,8 +11,8 @@ class RoomListCreateView(APIView):
 
     def get(self, request, *args, **kwargs):
         outcome = ServiceOutcome(RoomListService, {})
-        return Response(RoomSerializer(outcome.result, many=True).data)
+        return Response(RoomSerializer(outcome.result, many=True, context={'user': request.user}).data)
 
     def post(self, request, *args, **kwargs):
         outcome = ServiceOutcome(RoomCreateService, request.data | {'user': request.user})
-        return Response(RoomSerializer(outcome.result, many=False).data)
+        return Response(RoomSerializer(outcome.result, many=False, context={'user': request.user}).data)

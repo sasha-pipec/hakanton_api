@@ -15,7 +15,7 @@ class RoomAddUserService(ServiceWithResult):
     user = ModelField(User)
     id = forms.IntegerField()
 
-    custom_validations = ['check_count_players', 'room_user_presence']
+    custom_validations = ['check_user_in_some_room', 'check_count_players', 'room_user_presence']
 
     def process(self):
         self.run_custom_validations()
@@ -54,3 +54,7 @@ class RoomAddUserService(ServiceWithResult):
     def room_user_presence(self):
         if self._room_users.filter(id=self.cleaned_data['user'].id).exists():
             raise ValidationError('Игрок уже в комнате')
+
+    def check_user_in_some_room(self):
+        if self.cleaned_data['user'].room_set.all().exists():
+            raise ValidationError('Пользователь уже в другой комнате')
