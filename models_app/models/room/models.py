@@ -14,7 +14,7 @@ class Room(models.Model):
     count_players = models.IntegerField(default=2, verbose_name='Кол-во игроков')
 
     def __str__(self):
-        return self.pk
+        return f"{self.pk}"
 
     class Meta:
         db_table = 'rooms'
