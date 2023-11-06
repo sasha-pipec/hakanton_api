@@ -35,6 +35,9 @@ ALLOWED_HOSTS = env("ALLOWED_HOSTS", cast=lambda v: [s.strip() for s in v.split(
 INSTALLED_APPS = [
     "corsheaders",
     'channels',
+    'api',
+    'chat',
+    'models_app.apps.ModelsAppConfig',
     "daphne",
     'django.contrib.admin',
     'django.contrib.auth',
@@ -46,20 +49,17 @@ INSTALLED_APPS = [
     "rest_framework",
     'rest_framework.authtoken',
     'service_objects',
-    'api',
-    'chat',
-    'models_app.apps.ModelsAppConfig',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = 'conf.urls'
@@ -141,10 +141,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'models_app.User'
 
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173',
-]
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = ['*']
-# CSRF_TRUSTED_ORIGINS = env("CSRF_TRUSTED_ORIGINS", cast=lambda v: [s.strip() for s in v.split(",")])
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
