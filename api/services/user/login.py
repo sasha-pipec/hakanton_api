@@ -21,7 +21,10 @@ class UserLoginService(ServiceWithResult):
 
     @property
     def _token(self):
-        return Token.objects.get(user=self._user).key
+        return {
+            'user': self._user,
+            'key': Token.objects.get(user=self._user).key
+        }
 
     @property
     @lru_cache

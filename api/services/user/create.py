@@ -26,7 +26,10 @@ class UserRegisterService(ServiceWithResult):
 
     @staticmethod
     def _token(user):
-        return Token.objects.create(user=user).key
+        return {
+            'user': user,
+            'key': Token.objects.create(user=user).key
+        }
 
     def user_presence(self):
         if User.objects.filter(username=self.cleaned_data['login']):

@@ -15,18 +15,24 @@ class UserRegisterView(APIView):
 
     def post(self, request, *args, **kwargs):
         outcome = ServiceOutcome(UserRegisterService, request.data)
-        return Response({"key": outcome.result})
+        return Response({
+            "key": outcome.result["key"],
+            "user": UserSerializer(outcome.result["user"], many=False).data
+        })
 
 
 class UserLoginView(APIView):
 
     def post(self, request, *args, **kwargs):
         outcome = ServiceOutcome(UserLoginService, request.data)
-        return Response({"key": outcome.result})
+        return Response({
+            "key": outcome.result["key"],
+            "user": UserSerializer(outcome.result["user"], many=False).data
+        })
 
 
 class UserShowView(APIView):
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request, *args, **kwargs):
         return Response(UserSerializer(request.user).data)
