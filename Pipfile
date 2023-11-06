@@ -12,6 +12,8 @@ django-service-objects = {editable = true, git = "https://github.com/dvkurbatov/
 pillow = "*"
 pipenv = "*"
 djangorestframework = "==3.13.1"
+channels-redis = "*"
+channels = "*"
 
 [dev-packages]
 
