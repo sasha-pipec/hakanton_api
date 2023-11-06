@@ -8,4 +8,5 @@ urlpatterns = [
     path('users/login/', UserLoginView.as_view()),
     path('rooms/<int:id>/users/', RoomUserListView.as_view()),
     path('cards/', CardListView.as_view()),
+    path('cards/<int:pk>/action/', CardListView.as_view()),
 ]
