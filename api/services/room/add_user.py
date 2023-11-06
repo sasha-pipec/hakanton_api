@@ -24,6 +24,9 @@ class RoomAddUserService(ServiceWithResult):
     def _add_user(self):
         room = self._room
         room.users.add(self.cleaned_data['user'])
+        if room.users.count() == room.count_players:
+            room.status = Room.STARTED
+        room.save()
         return room
 
     @property
@@ -45,4 +48,3 @@ class RoomAddUserService(ServiceWithResult):
     def room_user_presence(self):
         if self._room_users.filter(id=self.cleaned_data['user'].id).exists():
             raise ValidationError('Игрок уже в комнате')
-
