@@ -8,6 +8,7 @@ from models_app.models import User, Room
 class RoomCreateService(ServiceWithResult):
     user = ModelField(User)
     count_players = forms.IntegerField()
+    title = forms.CharField()
 
     def process(self):
         self.result = self._create_room
@@ -15,6 +16,9 @@ class RoomCreateService(ServiceWithResult):
 
     @property
     def _create_room(self):
-        room = Room.objects.create(count_players=self.cleaned_data['count_players'])
+        room = Room.objects.create(
+            count_players=self.cleaned_data['count_players'],
+            title=self.cleaned_data['title']
+        )
         room.users.add(self.cleaned_data['user'])
         return room

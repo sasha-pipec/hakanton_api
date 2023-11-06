@@ -13,6 +13,7 @@ class RoomSerializer(serializers.ModelSerializer):
         model = Room
         fields = (
             'id',
+            'title',
             'count_players',
             'count_players_now',
         )

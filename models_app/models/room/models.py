@@ -12,6 +12,7 @@ class Room(models.Model):
     users = models.ManyToManyField(to='User', blank=True, verbose_name='Игроки комнаты')
     status = models.CharField(max_length=7, choices=STATUS, default=WAITED, verbose_name='Статус')
     count_players = models.IntegerField(default=2, verbose_name='Кол-во игроков')
+    title = models.CharField(max_length=255, verbose_name='Название')
 
     def __str__(self):
         return f"{self.pk}"
