@@ -33,11 +33,7 @@ ALLOWED_HOSTS = env("ALLOWED_HOSTS", cast=lambda v: [s.strip() for s in v.split(
 # Application definition
 
 INSTALLED_APPS = [
-    "rest_framework",
-    'rest_framework.authtoken',
-    'channels',
     "daphne",
-    'service_objects',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,6 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'drf_yasg',
+    "rest_framework",
+    'rest_framework.authtoken',
+    'channels',
+    'service_objects',
     'api',
     'chat',
     'models_app.apps.ModelsAppConfig',

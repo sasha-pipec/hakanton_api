@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "d72d97179f1d2ba8e48d1f381dc222fa30efda92b8ba6b70d696e1a9811aeaee"
+            "sha256": "84da32dc7e553fe4c7e9ab735a9683644e1eef7656d61670db1b85682bf9c360"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -125,11 +125,12 @@
                 "daphne"
             ],
             "hashes": [
-                "sha256:0ce53507a7da7b148eaa454526e0e05f7da5e5d1c23440e4886cf146981d8420",
-                "sha256:2253334ac76f67cba68c2072273f7e0e67dbdac77eeb7e318f511d2f9a53c5e4"
+                "sha256:0ff0422b4224d10efac76e451575517f155fe7c97d369b5973b116f22eeaf86c",
+                "sha256:fdd9a94987a23d8d7ebd97498ed8b8cc83163f37e53fc6c85098aba7a3bb8b75"
             ],
-            "markers": "python_version >= '3.7'",
-            "version": "==4.0.0"
+            "index": "pypi",
+            "markers": "python_version >= '3.6'",
+            "version": "==3.0.4"
         },
         "channels-redis": {
             "hashes": [
@@ -179,12 +180,12 @@
         },
         "daphne": {
             "hashes": [
-                "sha256:a288ece46012b6b719c37150be67c69ebfca0793a8521bf821533bad983179b2",
-                "sha256:cce9afc8f49a4f15d4270b8cfb0e0fe811b770a5cc795474e97e4da287497666"
+                "sha256:76ffae916ba3aa66b46996c14fa713e46004788167a4873d647544e750e0e99f",
+                "sha256:a9af943c79717bc52fe64a3c236ae5d3adccc8b5be19c881b442d2c3db233393"
             ],
             "index": "pypi",
-            "markers": "python_version >= '3.7'",
-            "version": "==4.0.0"
+            "markers": "python_version >= '3.6'",
+            "version": "==3.0.2"
         },
         "distlib": {
             "hashes": [
@@ -605,6 +606,7 @@
                 "sha256:0dab495cd5753069d3bc650a0dde8a8f9edde16fc5691b689a566eda58100d0f",
                 "sha256:ed4802971884ae19d640775ba3b03aa2e7bd5e8fb8dfaed2decce4d0fc48391f"
             ],
+            "index": "pypi",
             "markers": "python_version >= '3.7'",
             "version": "==5.0.1"
         },
