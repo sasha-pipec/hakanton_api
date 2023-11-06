@@ -13,7 +13,8 @@ pillow = "*"
 pipenv = "*"
 djangorestframework = "==3.13.1"
 channels-redis = "*"
-channels = "*"
+daphne = "*"
+channels = {extras = ["daphne"], version = "*"}
 
 [dev-packages]
 
