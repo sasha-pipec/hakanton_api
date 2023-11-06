@@ -14,7 +14,8 @@ def added_cards(first_param, second_param):
             Card.objects.create(
                 title=item['Title'],
                 cost=item['Cost'],
-                position=item['type']
+                position=item['type'],
+                type=Card.DEFAULT
             )
 
 
