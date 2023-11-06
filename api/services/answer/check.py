@@ -9,30 +9,58 @@ from models_app.models import Room, Answer, User, Card, UserCard
 
 class AnswerCheckService(ServiceWithResult):
     id = forms.IntegerField()
-    answer_id = forms.CharField()
-    card_id = forms.CharField()
+    answer_id = forms.IntegerField()
+    card_id = forms.IntegerField()
     user = ModelField(User)
 
     custom_validations = ['room_presence', 'answer_presence', 'card_presence']
 
     def process(self):
         self.run_custom_validations()
-        self._check()
+        self.result = self._check()
         return self
 
     def _check(self):
+        data = {
+            'send': True,
+            'card_color': None,
+            'owner_balance': {
+                'id': None,
+                'balance': None
+            },
+            'current_balance': {
+                'id': None,
+                'balance': None
+            },
+        }
         if self._answer.is_correct:
             if self.user_card:
-                pass
+                # Ответил правильно на чужом поле
+                data['send'] = False
             else:
+                # Ответил правильно на пустом поле
                 UserCard.objects.create(
                     room=self._room,
                     card=self._card,
-                    user=self.user
+                    user=self._user
                 )
+                data['card_color'] = self._user.color
         else:
-            self.user.balance = self.user.balance - 1000
-            self.user.save()
+            if self.user_card:
+                # Ответил неправильно на чужом поле
+                self._user.balance -= self._card.cost
+                self._user.save()
+                self.user_card.user.balance += self._card.cost
+                self.user_card.user.save()
+                data['owner_balance']['id'] = self.user_card.user.id
+                data['owner_balance']['balance'] = self.user_card.user.balance
+            else:
+                # Ответил неправильно на пустом поле
+                self._user.balance -= self._card.cost
+                self._user.save()
+            data['current_balance']['id'] = self._user.id
+            data['current_balance']['balance'] = self._user.balance
+        return data
 
     @property
     @lru_cache
@@ -46,7 +74,7 @@ class AnswerCheckService(ServiceWithResult):
             return None
 
     @property
-    def user(self):
+    def _user(self):
         return self.cleaned_data['user']
 
     @property
@@ -69,7 +97,7 @@ class AnswerCheckService(ServiceWithResult):
     @lru_cache
     def _answer(self):
         try:
-            return Answer.objects.get(id=self.cleaned_data['id'])
+            return Answer.objects.get(id=self.cleaned_data['answer_id'])
         except Answer.DoesNotExist:
             return None
 
