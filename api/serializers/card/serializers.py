@@ -5,11 +5,13 @@ from models_app.models import Card, UserCard
 
 class CardSerializer(serializers.ModelSerializer):
     color = serializers.SerializerMethodField()
+    owner_id = serializers.SerializerMethodField()
 
     class Meta:
         model = Card
         fields = (
             'id',
+            'owner_id',
             'title',
             'cost',
             'image',
@@ -26,3 +28,12 @@ class CardSerializer(serializers.ModelSerializer):
             ).user.color
         except UserCard.DoesNotExist:
             return None
+
+    def get_owner_id(self, obj):
+        owner = UserCard.objects.filter(
+            room_id=self.context['room_id'],
+            card=obj,
+        )
+        if owner.exists():
+            return owner.first().user.id
+        return None
