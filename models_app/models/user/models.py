@@ -21,7 +21,8 @@ class User(AbstractUser):
     balance = models.IntegerField(default=16000, verbose_name='Баланс')
     color = models.CharField(max_length=7, verbose_name='Цвет')
     is_sleep = models.BooleanField(default=False, verbose_name='Состояние хода игрока')
-    is_active = models.BooleanField(default=True,verbose_name='Состояние игрока')
+    is_active = models.BooleanField(default=True, verbose_name='Состояние игрока')
+    is_walk = models.BooleanField(default=False, verbose_name='Мой ход')
 
     REQUIRED_FIELDS = []
 

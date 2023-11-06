@@ -34,6 +34,7 @@ ALLOWED_HOSTS = env("ALLOWED_HOSTS", cast=lambda v: [s.strip() for s in v.split(
 
 INSTALLED_APPS = [
     "rest_framework",
+    'rest_framework.authtoken',
     'channels',
     "daphne",
     'service_objects',
@@ -112,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru-ru'
 
-TIME_ZONE = 'Moscow/Europe'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
