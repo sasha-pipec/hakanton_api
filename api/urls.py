@@ -3,12 +3,13 @@ from django.urls import path
 from api.views.rooms import RoomListCreateView
 from api.views.answer import AnswerCheckView
 from api.views.cards import CardListView, CardGetActionView
-from api.views.user import UserRegisterView, UserLoginView, RoomUserListCreateView, UserShowView
+from api.views.user import UserRegisterView, UserLoginView, RoomUserListCreateView, UserShowView, UserStepView
 
 urlpatterns = [
     path('users/register/', UserRegisterView.as_view()),
     path('users/login/', UserLoginView.as_view()),
     path('users/me/', UserShowView.as_view()),
+    path('users/step/', UserStepView.as_view()),
 
     path('rooms/', RoomListCreateView.as_view()),
     path('rooms/<int:id>/users/', RoomUserListCreateView.as_view()),

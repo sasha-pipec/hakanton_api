@@ -9,6 +9,7 @@ from api.serializers.user.serializers import UserSerializer, UserShortSerializer
 from api.services.user.create import UserRegisterService
 from api.services.user.list_by_room import RoomUserListService
 from api.services.user.login import UserLoginService
+from api.services.user.step import UserStepService
 
 
 class UserRegisterView(APIView):
@@ -47,3 +48,10 @@ class RoomUserListCreateView(APIView):
     def post(self, request, *args, **kwargs):
         outcome = ServiceOutcome(RoomAddUserService, kwargs | {'user': request.user})
         return Response(RoomSerializer(outcome.result, many=False, context={'user': request.user}).data)
+
+
+class UserStepView(APIView):
+
+    def post(self, request, *args, **kwargs):
+        outcome = ServiceOutcome(UserStepService, request.data | {'user': request.user})
+        return Response(UserSerializer(outcome.result).data)
