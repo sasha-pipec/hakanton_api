@@ -16,9 +16,9 @@ class UserStepService(ServiceWithResult):
 
     def _position(self):
         if self.cleaned_data['position'] > 40:
-            self._user.position = self.cleaned_data['position'] - 40
+            self._user.position = self._user.position + self.cleaned_data['position'] - 40
         else:
-            self._user.position = self.cleaned_data['position']
+            self._user.position = self._user.position + self.cleaned_data['position']
         self._user.save()
 
     @property
