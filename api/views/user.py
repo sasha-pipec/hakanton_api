@@ -54,4 +54,7 @@ class UserStepView(APIView):
 
     def post(self, request, *args, **kwargs):
         outcome = ServiceOutcome(UserStepService, request.data | {'user': request.user})
-        return Response(UserSerializer(outcome.result).data)
+        return Response({
+            'user': UserSerializer(outcome.result['user']).data,
+            "card_id": outcome.result['card_id']
+        })
