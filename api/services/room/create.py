@@ -21,4 +21,6 @@ class RoomCreateService(ServiceWithResult):
             title=self.cleaned_data['title']
         )
         room.users.add(self.cleaned_data['user'])
+        self.cleaned_data['user'].is_walk=True
+        self.cleaned_data['user'].save()
         return room

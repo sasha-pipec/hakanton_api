@@ -64,6 +64,22 @@ class AnswerCheckService(ServiceWithResult):
                 self._user.save()
             data['current_balance']['id'] = self._user.id
             data['current_balance']['balance'] = self._user.balance
+        user_list = [user for user in users_in_room]
+        walk_user_id = 0
+        for index, user in enumerate(user_list):
+            if user.is_walk:
+                if index == len(user_list) - 1:
+                    user_list[0].is_walk = True
+                    user_list[0].save()
+                    walk_user_id = user_list[0].id
+                else:
+                    user.is_walk = False
+                    user.save()
+                    user_list[index + 1].is_walk = True
+                    user_list[index + 1].save()
+                    walk_user_id = user_list[index + 1].id
+                break
+        data['walk_user_id'] = walk_user_id
         return data
 
     @property
