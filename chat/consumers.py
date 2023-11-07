@@ -30,6 +30,13 @@ class WSChatRoomView(WebsocketConsumer):
             }
         )
 
+    def room_step(self, event):
+        async_to_sync(
+            self.send(text_data=json.dumps({
+                **event
+            }))
+        )
+
     def send_color(self, event):
         async_to_sync(
             self.send(text_data=json.dumps({
