@@ -7,6 +7,7 @@ class RoomSerializer(serializers.ModelSerializer):
     count_players_now = serializers.SerializerMethodField()
     in_room = serializers.SerializerMethodField()
     users = serializers.SerializerMethodField()
+    is_started = serializers.SerializerMethodField
 
     def get_count_players_now(self, obj):
         return obj.users.all().count()
@@ -27,5 +28,5 @@ class RoomSerializer(serializers.ModelSerializer):
             'count_players',
             'count_players_now',
             'in_room',
-            'users'
+            'users',
         )
