@@ -32,10 +32,7 @@ class CardGetActionView(APIView):
 
     def get(self, request, *args, **kwargs):
         outcome = ServiceOutcome(CardActionService, kwargs)
-        if isinstance(outcome.result, Event):
-            return Response(EventSerializer(outcome.result).data)
-        else:
-            return Response(QuestionSerializer(outcome.result).data)
+        return Response(QuestionSerializer(outcome.result).data)
 
 
 class CardInfoView(APIView):

@@ -15,7 +15,7 @@ urlpatterns = [
     path('rooms/<int:id>/cards/', CardListView.as_view()),
 
     # path('rooms/<int:room_id>/cards/<int:id>/info/', CardInfoView.as_view()),
-    path('cards/<int:pk>/action/', CardGetActionView.as_view()),
+    path('cards/action/', CardGetActionView.as_view()),
 
     path('rooms/<int:id>/answer/check/', AnswerCheckView.as_view()),
 ]

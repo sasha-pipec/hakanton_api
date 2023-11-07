@@ -32,13 +32,19 @@ class AnswerCheckService(ServiceWithResult):
                 'id': None,
                 'balance': None
             },
+            'new_user_step_id': None
         }
+        users_in_room = self._room.users.all()
+        for index, user in enumerate(users_in_room):
+            if user == self._user and index != len(users_in_room) - 1:
+                data['new_user_step_id'] = users_in_room[index + 1].id
+            elif index == len(users_in_room) - 1:
+                data['new_user_step_id'] = users_in_room[0].id
+
         if self._answer.is_correct:
             if self.user_card:
-                # Ответил правильно на чужом поле
                 data['send'] = False
             else:
-                # Ответил правильно на пустом поле
                 UserCard.objects.create(
                     room=self._room,
                     card=self._card,
@@ -47,7 +53,6 @@ class AnswerCheckService(ServiceWithResult):
                 data['card_color'] = self._user.color
         else:
             if self.user_card:
-                # Ответил неправильно на чужом поле
                 self._user.balance -= self._card.cost
                 self._user.save()
                 self.user_card.user.balance += self._card.cost
@@ -55,7 +60,6 @@ class AnswerCheckService(ServiceWithResult):
                 data['owner_balance']['id'] = self.user_card.user.id
                 data['owner_balance']['balance'] = self.user_card.user.balance
             else:
-                # Ответил неправильно на пустом поле
                 self._user.balance -= self._card.cost
                 self._user.save()
             data['current_balance']['id'] = self._user.id
