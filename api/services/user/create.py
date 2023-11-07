@@ -21,7 +21,7 @@ class UserRegisterService(ServiceWithResult):
     def _register(self):
         return User.objects.create_user(
             username=self.cleaned_data['login'],
-            password=self.cleaned_data['password']
+            password=self.cleaned_data['password'],
         )
 
     @staticmethod

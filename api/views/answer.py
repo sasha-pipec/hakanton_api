@@ -10,6 +10,6 @@ class AnswerCheckView(APIView):
     def post(self, request, *args, **kwargs):
         outcome = ServiceOutcome(
             AnswerCheckService,
-            request.data.dict() | kwargs | {"user": request.user}
+            request.data | kwargs | {"user": request.user}
         )
         return Response(outcome.result)
